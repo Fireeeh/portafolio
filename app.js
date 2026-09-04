@@ -1,63 +1,16 @@
 // Año footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Contador de visitas global con CountAPI
-(function initVisitorCounter(){
-  const countEl = document.getElementById('visitorCount');
-  if(!countEl) return;
-  
-  // Namespace único para tu portafolio
-  const NAMESPACE = 'mackarena-portfolio';
-  const KEY = 'page-visits';
-  
-  // Estado de carga
-  countEl.textContent = '👁 ...';
-  countEl.style.opacity = '0.5';
-  
-  // Primero intentamos obtener el contador actual
-  fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.value !== undefined) {
-        // El contador existe, incrementamos
-        return fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`);
-      } else {
-        // El contador no existe, lo creamos
-        return fetch(`https://api.countapi.xyz/create?namespace=${NAMESPACE}&key=${KEY}&value=0`);
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Si acabamos de crear, necesitamos hacer hit
-      if (data.namespace) {
-        return fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`).then(r => r.json());
-      }
-      return data;
-    })
-    .then(data => {
-      const count = data.value || 0;
-      countEl.textContent = `👁 ${count.toLocaleString('es-ES')} ${count === 1 ? 'visita' : 'visitas'}`;
-      countEl.style.opacity = '';
-    })
-    .catch(error => {
-      // Fallback a localStorage si falla la API
-      console.warn('CountAPI no disponible, usando contador local:', error);
-      const STORAGE_KEY = 'portfolioVisitCount';
-      let count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-      count++;
-      localStorage.setItem(STORAGE_KEY, count.toString());
-      countEl.textContent = `👁 ${count.toLocaleString('es-ES')} (local)`;
-      countEl.style.opacity = '';
-    });
-})();
 
 // Tema Oscuro <-> Crema
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
 
+const themeLabel = themeBtn.querySelector('.btn__label');
+
 function setTheme(next){
   html.setAttribute('data-theme', next);
-  themeBtn.textContent = next === 'dark' ? 'Tema: Oscuro' : 'Tema: Crema';
+  themeLabel.textContent = next === 'dark' ? 'Tema: Oscuro' : 'Tema: Crema';
   themeBtn.setAttribute('aria-label', next === 'dark' ? 'Cambiar a tema crema' : 'Cambiar a tema oscuro');
 }
 
@@ -67,6 +20,47 @@ themeBtn.addEventListener('click', () => {
   const current = html.getAttribute('data-theme');
   setTheme(current === 'dark' ? 'cream' : 'dark');
 });
+
+// Menu movil
+(function initMobileMenu(){
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  if(!burger || !navLinks) return;
+
+  function setMenu(open){
+    navLinks.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Cerrar menu' : 'Abrir menu');
+  }
+
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMenu(burger.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Cerrar al elegir una seccion
+  navLinks.addEventListener('click', (e) => {
+    if(e.target.closest('a')) setMenu(false);
+  });
+
+  // Cerrar al tocar fuera del menu
+  document.addEventListener('click', (e) => {
+    if(!navLinks.contains(e.target) && !burger.contains(e.target)) setMenu(false);
+  });
+
+  // Cerrar con Escape, devolviendo el foco al boton
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && navLinks.classList.contains('is-open')){
+      setMenu(false);
+      burger.focus();
+    }
+  });
+
+  // Al volver a escritorio el panel deja de aplicar
+  window.matchMedia('(min-width: 921px)').addEventListener('change', (e) => {
+    if(e.matches) setMenu(false);
+  });
+})();
 
 // Reveal
 const revealEls = document.querySelectorAll('.reveal');

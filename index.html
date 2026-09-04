@@ -23,16 +23,22 @@
           </span>
         </a>
 
-        <nav class="nav__links" aria-label="Secciones">
+        <nav class="nav__links" id="navLinks" aria-label="Secciones">
           <a href="#top">Inicio</a>
           <a href="#proyectos">Proyectos</a>
           <a href="#habilidades">Habilidades</a>
+          <a class="nav__links-extra" href="https://github.com/Fireeeh" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
 
         <div class="nav__cta">
-          <button class="btn btn--toggle" id="themeBtn" type="button" aria-label="Cambiar tema">Tema: Oscuro</button>
-          <a class="btn" href="https://github.com/Fireeeh" target="_blank" rel="noreferrer">GitHub</a>
+          <button class="btn btn--toggle" id="themeBtn" type="button" aria-label="Cambiar tema"><span class="btn__label">Tema: Oscuro</span></button>
+          <a class="btn btn--desktop" href="https://github.com/Fireeeh" target="_blank" rel="noreferrer">GitHub</a>
           <a class="btn btn--primary" href="https://www.linkedin.com/in/mackarenafloresg/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <button class="nav__burger" id="navBurger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </header>
@@ -58,7 +64,7 @@
 
               <div class="hero__actions">
                 <a class="btn btn--primary" href="#proyectos">Ver proyectos</a>
-                <a class="btn" href="https://www.linkedin.com/in/mackarenafloresg/L" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a class="btn" href="https://www.linkedin.com/in/mackarenafloresg/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a class="btn" href="mailto:mgarrido@duocuc.cl">Contacto</a>
               </div>
 
@@ -143,7 +149,7 @@
             </div>
 
             <div class="grid">
-              <article class="card proj col-6">
+              <article class="card proj col-12">
                 <div class="proj__media"><span><img src="./los_lingues.png" style="max-width: 100%; height: auto; display: block;"></span></div>
                 <div class="proj__top">
                   <h3 class="proj__title">Agrícola Los Lingues — Sitio Web Corporativo</h3>
@@ -161,21 +167,6 @@
                 </div>
               </article>
 
-              <article class="card proj proj--placeholder col-6">
-                <div class="proj__media"><span>Preview / Screenshot</span></div>
-                <div class="proj__top">
-                  <h3 class="proj__title">Proyecto Front-End (personal)</h3>
-                  <span class="tag">Personal</span>
-                </div>
-                <p class="proj__desc">
-                  Proyecto para practicar maquetación, estilos y JavaScript, con foco en UI clara y responsive.
-                </p>
-                <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-                <div class="proj__links">
-                  <a class="btn btn--primary" href="https://TU_DEMO_PERSONAL" target="_blank" rel="noreferrer">Ver demo</a>
-                  <a class="btn" href="https://github.com/TU_USUARIO/TU_REPO_PERSONAL" target="_blank" rel="noreferrer">Ver código</a>
-                </div>
-              </article>
             </div>
           </section>
 
@@ -221,7 +212,6 @@
 
             <div class="footer__small">
               Hecho por Mackarena Flores · <span id="year"></span>
-              <span class="visitor-count" id="visitorCount" aria-label="Contador de visitas"></span>
             </div>
           </footer>
         </div>

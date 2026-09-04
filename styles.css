@@ -110,6 +110,34 @@ a:hover{ text-decoration:underline; }
 }
 .nav__cta{ display:flex; gap:10px; align-items:center; }
 
+/* Boton hamburguesa: solo visible en movil */
+.nav__burger{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:4px;
+  width:40px; height:40px;
+  padding:0;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:color-mix(in srgb, var(--panel) 80%, transparent);
+  cursor:pointer;
+}
+.nav__burger span{
+  display:block;
+  width:18px; height:2px;
+  margin:0 auto;
+  border-radius:2px;
+  background:var(--text);
+  transition:transform .22s ease, opacity .22s ease;
+}
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+/* GitHub vive en .nav__cta en escritorio y dentro del menu en movil */
+.nav__links-extra{ display:none; }
+
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
   padding:10px 12px;
@@ -148,7 +176,45 @@ a:hover{ text-decoration:underline; }
 }
 
 @media (max-width: 920px){
-  .nav__links{ display:none; }
+  .nav__burger{ display:flex; }
+  .btn--desktop{ display:none; }
+  .nav__links-extra{ display:block; }
+
+  .nav__links{
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0; right:0;
+    flex-direction:column;
+    gap:4px;
+    padding:10px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    /* Base opaca + tinte del panel: el menu no debe transparentar el hero */
+    background:
+      linear-gradient(
+        color-mix(in srgb, var(--panel2) 65%, transparent),
+        color-mix(in srgb, var(--panel2) 65%, transparent)
+      ),
+      var(--bg2);
+    backdrop-filter:blur(12px);
+    box-shadow:var(--shadow);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-8px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  .nav__links.is-open{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+  .nav__links a{
+    font-size:14px;
+    padding:11px 14px;
+    border-radius:14px;
+    color:var(--text);
+  }
+
   .brand{ min-width:unset; }
   .nav__bar{ padding: 10px 12px; gap: 8px; }
   .brand__dot{ width: 30px; height: 30px; }
@@ -161,7 +227,10 @@ a:hover{ text-decoration:underline; }
 }
 
 @media (max-width: 640px){
-  .nav__cta .btn:not(.btn--primary){ display: none; }
+  /* El toggle se conserva, reducido a su punto de color */
+  .btn--toggle .btn__label{ display: none; }
+  .btn--toggle{ width: 40px; height: 40px; padding: 0; }
+  .btn--toggle:before{ left: 50%; transform: translate(-50%, -50%); }
   .brand__text{ display: flex; flex-direction: column; }
   .brand__role{ display: none; }
 }
@@ -325,10 +394,11 @@ section{ scroll-margin-top:90px; }
   grid-template-columns:repeat(12, 1fr);
   gap:12px;
 }
+.col-12{ grid-column:span 12; }
 .col-6{ grid-column:span 6; }
 .col-4{ grid-column:span 4; }
 @media (max-width: 920px){
-  .col-6,.col-4{ grid-column:span 12; }
+  .col-12,.col-6,.col-4{ grid-column:span 12; }
   .grid{ gap: 10px; }
   .section__head{ margin: 0 0 10px; flex-wrap: wrap; }
   .section__head h2{ font-size: 16px; }
@@ -427,13 +497,6 @@ section{ scroll-margin-top:90px; }
   .list{ font-size: 12.5px; line-height: 1.65; padding-left: 16px; }
 }
 
-.proj--placeholder{ opacity:.95; }
-.proj--placeholder .proj__media{
-  background:linear-gradient(135deg,
-    color-mix(in srgb, var(--c4) 35%, transparent),
-    color-mix(in srgb, var(--panel2) 60%, transparent)
-  );
-}
 
 /* Footer */
 .footer{
@@ -464,23 +527,6 @@ section{ scroll-margin-top:90px; }
   color:color-mix(in srgb, var(--muted) 85%, transparent);
   font-size:12.5px;
 }
-.visitor-count{
-  display:inline-block;
-  margin-left:10px;
-  padding:3px 8px;
-  border-radius:6px;
-  background:color-mix(in srgb, var(--panel2) 40%, transparent);
-  border:1px solid color-mix(in srgb, var(--border) 50%, transparent);
-  font-size:11px;
-  color:color-mix(in srgb, var(--muted) 70%, transparent);
-  font-variant-numeric:tabular-nums;
-  letter-spacing:0.3px;
-  opacity:0.7;
-  transition:opacity 0.3s ease;
-}
-.visitor-count:hover{
-  opacity:1;
-}
 .footer__links{
   display:flex;
   gap:10px;
@@ -494,7 +540,6 @@ section{ scroll-margin-top:90px; }
   .footer__msg{ font-size: 12.5px; }
   .footer__small{ padding: 8px 12px 12px; font-size: 11px; }
   .footer__links{ width: 100%; justify-content: center; }
-  .visitor-count{ margin-left: 6px; padding: 2px 6px; font-size: 10px; }
 }
 
 /* Animaciones */
