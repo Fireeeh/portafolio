@@ -160,6 +160,15 @@ a:hover{ text-decoration:underline; }
 }
 .btn--primary:hover{ filter:brightness(1.03); }
 
+/* Boton de descarga del CV, con icono de flecha */
+.btn--cv::before{
+  content:"";
+  width:9px; height:9px;
+  border-left:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:translateY(-2px) rotate(-45deg);
+}
+
 .btn--toggle{
   border-color:color-mix(in srgb, var(--c1) 40%, var(--border));
   position:relative;
