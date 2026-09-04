@@ -79,7 +79,7 @@
     <header class="nav" aria-label="Navegación principal">
       <div class="nav__bar">
         <a class="brand" href="#top" aria-label="Ir al inicio">
-          <span class="brand__dot" aria-hidden="true"></span>
+          <img class="brand__dot" src="./avatar.webp" width="96" height="96" alt="" aria-hidden="true">
           <span class="brand__text">
             <span class="brand__name">Mackarena Flores</span>
             <span class="brand__role">Solution Architect</span>
@@ -147,62 +147,16 @@
           </div>
         </div>
 
-        <div class="hero__illus" aria-label="Ilustración (código)">
+        <div class="hero__illus">
           <div class="illus-card">
-            <div class="illus floaty pulse-border" aria-hidden="true">
-              <svg viewBox="0 0 400 400" width="100%" height="100%" role="presentation">
-                <defs>
-                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="var(--c1)" stop-opacity="0.95"></stop>
-                    <stop offset="1" stop-color="var(--c3)" stop-opacity="0.85"></stop>
-                  </linearGradient>
-                  <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="var(--c4)" stop-opacity="0.85"></stop>
-                    <stop offset="1" stop-color="var(--c2)" stop-opacity="0.65"></stop>
-                  </linearGradient>
-                  <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="26"></feGaussianBlur>
-                  </filter>
-                </defs>
-
-                <circle cx="120" cy="110" r="86" fill="url(#g1)" opacity="0.30" filter="url(#blur)"></circle>
-                <circle cx="280" cy="300" r="80" fill="url(#g2)" opacity="0.26" filter="url(#blur)"></circle>
-
-                <g class="capa">
-                  <rect x="52" y="52" width="84" height="42" rx="12"/>
-                  <rect x="158" y="52" width="84" height="42" rx="12"/>
-                  <rect x="264" y="52" width="84" height="42" rx="12"/>
-                </g>
-
-                <path class="hilo" d="M94 94 V 128 M200 94 V 128 M306 94 V 128 M94 128 H 306 M200 128 V 158"/>
-
-                <g class="capa capa--nucleo">
-                  <rect x="112" y="158" width="176" height="58" rx="16"/>
-                </g>
-                <circle class="latido" cx="200" cy="187" r="7" fill="url(#g1)"/>
-
-                <path class="hilo" d="M200 216 V 244 M128 244 H 272 M128 244 V 268 M272 244 V 268"/>
-
-                <g class="capa">
-                  <rect x="70" y="268" width="116" height="50" rx="14"/>
-                  <rect x="214" y="268" width="116" height="50" rx="14"/>
-                </g>
-
-                <g class="pulso">
-                  <circle r="4" fill="url(#g1)">
-                    <animateMotion dur="4.2s" repeatCount="indefinite"
-                                   path="M200 94 V 128 H 306 V 158"/>
-                  </circle>
-                  <circle r="4" fill="url(#g2)">
-                    <animateMotion dur="5.1s" begin="1.2s" repeatCount="indefinite"
-                                   path="M200 216 V 244 H 128 V 268"/>
-                  </circle>
-                  <circle r="3.5" fill="url(#g1)">
-                    <animateMotion dur="4.7s" begin="2.4s" repeatCount="indefinite"
-                                   path="M200 216 V 244 H 272 V 268"/>
-                  </circle>
-                </g>
-              </svg>
+            <div class="illus floaty pulse-border">
+              <img class="retrato"
+                   src="./retrato.webp"
+                   srcset="./retrato-480.webp 480w, ./retrato.webp 840w"
+                   sizes="(max-width: 920px) 60vw, 420px"
+                   width="840" height="840"
+                   decoding="async"
+                   alt="Mackarena Flores, de pie en un mirador de montaña">
             </div>
           </div>
         </div>
