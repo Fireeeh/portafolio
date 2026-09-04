@@ -22,6 +22,7 @@ html[data-theme="cream"]{
 
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
+html{ scroll-behavior:smooth; }
 
 /* Fondo único */
 body{
@@ -268,7 +269,7 @@ a:hover{ text-decoration:underline; }
   justify-content:center;
   background:transparent;
 }
-.hero__below{ padding:18px; }
+main > section + section{ margin-top:16px; }
 
 @media (max-width: 920px){ 
   .hero__layout{ grid-template-columns:1fr; min-height: auto; }
@@ -407,7 +408,7 @@ section{ scroll-margin-top:90px; }
 @media (max-width: 640px){
   .wrap{ width: min(100% - 24px, var(--max)); padding: 12px 0 50px; }
   .grid{ gap: 8px; }
-  .hero__below{ padding: 12px; }
+  main > section + section{ margin-top:12px; }
   section{ scroll-margin-top: 70px; }
 }
 
