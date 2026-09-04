@@ -364,6 +364,18 @@ h1{
   font-size:15.5px;
   line-height:1.65;
 }
+
+/* La frase con la que ella misma describe su trabajo: abre el hero */
+.lead--tesis{
+  color:var(--text);
+  font-size:19px;
+  font-weight:600;
+  letter-spacing:-.2px;
+  margin-bottom:14px;
+}
+@media (max-width: 640px){
+  .lead--tesis{ font-size:16.5px; }
+}
 .hero__actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
 .meta{
   margin-top:16px;
