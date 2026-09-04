@@ -120,9 +120,10 @@ a:hover{ text-decoration:underline; }
 .brand{ display:flex; align-items:center; gap:10px; min-width:220px; }
 .brand__dot{
   width:34px; height:34px; border-radius:50%;
-  background:linear-gradient(135deg, var(--c1), var(--c3));
+  object-fit:cover;
+  display:block;
   box-shadow:0 12px 30px rgba(237,123,131,.22);
-  border:1px solid color-mix(in srgb, var(--c1) 45%, transparent);
+  border:1px solid color-mix(in srgb, var(--c1) 55%, transparent);
 }
 .brand__text{ display:flex; flex-direction:column; line-height:1.1; }
 .brand__name{ font-weight:800; font-size:14px; letter-spacing:.2px; }
@@ -412,35 +413,33 @@ h1{
   position:relative;
   transform:translateZ(0);
 }
-/* Ilustracion del hero: esquema de capas (clientes, nucleo, datos) */
-.capa rect{
-  fill:color-mix(in srgb, var(--panel2) 80%, transparent);
-  stroke:color-mix(in srgb, var(--c1) 38%, var(--border));
-  stroke-width:1.5;
-}
-.capa--nucleo rect{
-  fill:color-mix(in srgb, var(--c1) 16%, transparent);
-  stroke:color-mix(in srgb, var(--c1) 55%, transparent);
-  stroke-width:2;
-}
-.hilo{
-  fill:none;
-  stroke:color-mix(in srgb, var(--c1) 40%, var(--border));
-  stroke-width:1.5;
-  stroke-linecap:round;
-}
-.latido{ animation:latido 3.4s ease-in-out infinite; transform-origin:200px 187px; }
-@keyframes latido{
-  0%,100%{ opacity:.55; transform:scale(1); }
-  50%{ opacity:1; transform:scale(1.35); }
+
+.retrato{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:22px;
 }
 
+/* Velo coral: integra la foto en la paleta sin apagar el rostro.
+   Va sobre la imagen, por eso este ::after sube su z-index. */
 .illus::after{
   content:"";
-  position:absolute; inset:-60px;
-  background:radial-gradient(400px 240px at 20% 15%, rgba(255,255,255,0.20), transparent 65%);
+  position:absolute;
+  inset:0;
+  z-index:1;
   pointer-events:none;
+  border-radius:22px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--c1) 16%, transparent) 0%,
+      transparent 42%,
+      color-mix(in srgb, var(--c1) 26%, transparent) 100%),
+    radial-gradient(400px 240px at 20% 15%, rgba(255,255,255,0.14), transparent 65%);
+  mix-blend-mode:soft-light;
 }
+
 
 /* Secciones / grid */
 section{ scroll-margin-top:90px; }
