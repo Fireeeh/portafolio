@@ -73,6 +73,60 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e
   });
 })();
 
+// Carrusel del hero
+(function initCarrusel(){
+  const capa = document.querySelector('.carrusel');
+  if(!capa) return;
+  const fotos = [...capa.querySelectorAll('.carrusel__foto')];
+  if(fotos.length < 2) return;
+
+  const CADA_MS = 5000;
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let actual = 0;
+  let id = null;
+
+  // Las fotos 2 en adelante solo se piden tras la primera pintura,
+  // para no encarecer la carga inicial de la pagina.
+  function cargarRestantes(){
+    fotos.slice(1).forEach(img => {
+      if(img.dataset.src){
+        img.srcset = img.dataset.srcset || '';
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+    });
+  }
+
+  function avanzar(){
+    fotos[actual].classList.remove('is-activa');
+    actual = (actual + 1) % fotos.length;
+    fotos[actual].classList.add('is-activa');
+  }
+
+  function arrancar(){
+    if(id === null && !reducido.matches) id = setInterval(avanzar, CADA_MS);
+  }
+  function detener(){
+    if(id !== null){ clearInterval(id); id = null; }
+  }
+
+  // Se pausa al pasar el cursor, para poder mirar una foto con calma
+  capa.addEventListener('mouseenter', detener);
+  capa.addEventListener('mouseleave', arrancar);
+
+  // Con la pestana oculta no se pinta nada
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? detener() : arrancar();
+  });
+
+  reducido.addEventListener('change', () => {
+    reducido.matches ? detener() : arrancar();
+  });
+
+  if(document.readyState === 'complete'){ cargarRestantes(); arrancar(); }
+  else window.addEventListener('load', () => { cargarRestantes(); arrancar(); });
+})();
+
 // Reveal
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
