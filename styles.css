@@ -414,12 +414,29 @@ h1{
   transform:translateZ(0);
 }
 
-.retrato{
+/* Carrusel del hero: las fotos se apilan y se cruzan por opacidad */
+.carrusel{
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  overflow:hidden;
+}
+.carrusel__foto{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
-  border-radius:22px;
+  opacity:0;
+  transition:opacity 1.2s ease-in-out;
+}
+.carrusel__foto.is-activa{ opacity:1; }
+
+/* Sin movimiento: se queda fija la primera y se ocultan las demas */
+@media (prefers-reduced-motion: reduce){
+  .carrusel__foto{ display:none; }
+  .carrusel__foto.is-activa{ display:block; opacity:1; }
 }
 
 /* Velo coral: integra la foto en la paleta sin apagar el rostro.

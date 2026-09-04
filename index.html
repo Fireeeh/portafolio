@@ -150,13 +150,37 @@
         <div class="hero__illus">
           <div class="illus-card">
             <div class="illus floaty pulse-border">
-              <img class="retrato"
-                   src="./retrato.webp"
-                   srcset="./retrato-480.webp 480w, ./retrato.webp 840w"
-                   sizes="(max-width: 920px) 60vw, 420px"
-                   width="840" height="840"
-                   decoding="async"
-                   alt="Mackarena Flores, de pie en un mirador de montaña">
+              <div class="carrusel" role="img" aria-label="Fotografías de Mackarena Flores">
+                <img class="carrusel__foto is-activa"
+                     src="./retrato-1.webp"
+                     srcset="./retrato-1-480.webp 480w, ./retrato-1.webp 840w"
+                     sizes="(max-width: 920px) 60vw, 420px"
+                     width="840" height="840"
+                     decoding="async"
+                     fetchpriority="high"
+                     alt="">
+                <img class="carrusel__foto"
+                     data-src="./retrato-2.webp"
+                     data-srcset="./retrato-2-480.webp 480w, ./retrato-2.webp 840w"
+                     sizes="(max-width: 920px) 60vw, 420px"
+                     width="840" height="840"
+                     decoding="async"
+                     alt="">
+                <img class="carrusel__foto"
+                     data-src="./retrato-3.webp"
+                     data-srcset="./retrato-3-480.webp 480w, ./retrato-3.webp 840w"
+                     sizes="(max-width: 920px) 60vw, 420px"
+                     width="840" height="840"
+                     decoding="async"
+                     alt="">
+                <img class="carrusel__foto"
+                     data-src="./retrato-4.webp"
+                     data-srcset="./retrato-4-480.webp 480w, ./retrato-4.webp 840w"
+                     sizes="(max-width: 920px) 60vw, 420px"
+                     width="840" height="840"
+                     decoding="async"
+                     alt="">
+              </div>
             </div>
           </div>
         </div>
