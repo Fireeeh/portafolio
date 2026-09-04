@@ -3,10 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portafolio — Ingeniera en informática (Front-End en formación)." />
-  <title>Portafolio de presentación</title>
+  <meta name="description" content="Portafolio de Mackarena Flores, ingeniera en informática enfocada en desarrollo front-end. Proyectos, habilidades y contacto." />
+  <title>Mackarena Flores — Portafolio Front-End</title>
+  <link rel="canonical" href="https://fireeeh.github.io/portafolio/" />
+
+  <!-- Iconos -->
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#eee9c7" media="(prefers-color-scheme: light)" />
+
+  <!-- Open Graph: como se ve el enlace al compartirlo -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:site_name" content="Portafolio de Mackarena Flores" />
+  <meta property="og:title" content="Mackarena Flores — Portafolio Front-End" />
+  <meta property="og:description" content="Ingeniera en informática enfocada en desarrollo front-end, con 8 años de experiencia previa en el sector salud." />
+  <meta property="og:url" content="https://fireeeh.github.io/portafolio/" />
+  <meta property="og:image" content="https://fireeeh.github.io/portafolio/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Mackarena Flores — Ingeniera en informática, Front-End" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Resuelve el tema antes de pintar, para que no parpadee al recargar -->
+  <script>
+    (function(){
+      var guardado;
+      try { guardado = localStorage.getItem('theme'); } catch(e){}
+      var prefiereClaro = window.matchMedia('(prefers-color-scheme: light)').matches;
+      document.documentElement.setAttribute(
+        'data-theme',
+        guardado || (prefiereClaro ? 'cream' : 'dark')
+      );
+    })();
+  </script>
 </head>
 
 <body>
@@ -150,7 +183,15 @@
 
             <div class="grid">
               <article class="card proj col-12">
-                <div class="proj__media"><span><img src="./los_lingues.png" style="max-width: 100%; height: auto; display: block;"></span></div>
+                <div class="proj__media">
+                  <img class="proj__img"
+                       src="./los_lingues.webp"
+                       srcset="./los_lingues-700.webp 700w, ./los_lingues.webp 1200w"
+                       sizes="(min-width: 1160px) 1056px, 92vw"
+                       width="1200" height="733"
+                       loading="lazy" decoding="async"
+                       alt="Sitio web de Agrícola Los Lingues: portada con fotografías de faena forestal y el catálogo de madera dimensionada">
+                </div>
                 <div class="proj__top">
                   <h3 class="proj__title">Agrícola Los Lingues — Sitio Web Corporativo</h3>
                   <span class="tag">Proyecto Front-End</span>
