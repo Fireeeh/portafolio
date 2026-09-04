@@ -458,23 +458,6 @@ section{ scroll-margin-top:90px; }
   color:color-mix(in srgb, var(--muted) 85%, transparent);
   font-size:12.5px;
 }
-.visitor-count{
-  display:inline-block;
-  margin-left:10px;
-  padding:3px 8px;
-  border-radius:6px;
-  background:color-mix(in srgb, var(--panel2) 40%, transparent);
-  border:1px solid color-mix(in srgb, var(--border) 50%, transparent);
-  font-size:11px;
-  color:color-mix(in srgb, var(--muted) 70%, transparent);
-  font-variant-numeric:tabular-nums;
-  letter-spacing:0.3px;
-  opacity:0.7;
-  transition:opacity 0.3s ease;
-}
-.visitor-count:hover{
-  opacity:1;
-}
 .footer__links{
   display:flex;
   gap:10px;
@@ -488,7 +471,6 @@ section{ scroll-margin-top:90px; }
   .footer__msg{ font-size: 12.5px; }
   .footer__small{ padding: 8px 12px 12px; font-size: 11px; }
   .footer__links{ width: 100%; justify-content: center; }
-  .visitor-count{ margin-left: 6px; padding: 2px 6px; font-size: 10px; }
 }
 
 /* Animaciones */

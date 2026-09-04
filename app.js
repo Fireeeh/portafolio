@@ -1,55 +1,6 @@
 // Año footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Contador de visitas global con CountAPI
-(function initVisitorCounter(){
-  const countEl = document.getElementById('visitorCount');
-  if(!countEl) return;
-  
-  // Namespace único para tu portafolio
-  const NAMESPACE = 'mackarena-portfolio';
-  const KEY = 'page-visits';
-  
-  // Estado de carga
-  countEl.textContent = '👁 ...';
-  countEl.style.opacity = '0.5';
-  
-  // Primero intentamos obtener el contador actual
-  fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
-    .then(response => response.json())
-    .then(data => {
-      if (data.value !== undefined) {
-        // El contador existe, incrementamos
-        return fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`);
-      } else {
-        // El contador no existe, lo creamos
-        return fetch(`https://api.countapi.xyz/create?namespace=${NAMESPACE}&key=${KEY}&value=0`);
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Si acabamos de crear, necesitamos hacer hit
-      if (data.namespace) {
-        return fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`).then(r => r.json());
-      }
-      return data;
-    })
-    .then(data => {
-      const count = data.value || 0;
-      countEl.textContent = `👁 ${count.toLocaleString('es-ES')} ${count === 1 ? 'visita' : 'visitas'}`;
-      countEl.style.opacity = '';
-    })
-    .catch(error => {
-      // Fallback a localStorage si falla la API
-      console.warn('CountAPI no disponible, usando contador local:', error);
-      const STORAGE_KEY = 'portfolioVisitCount';
-      let count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-      count++;
-      localStorage.setItem(STORAGE_KEY, count.toString());
-      countEl.textContent = `👁 ${count.toLocaleString('es-ES')} (local)`;
-      countEl.style.opacity = '';
-    });
-})();
 
 // Tema Oscuro <-> Crema
 const html = document.documentElement;
