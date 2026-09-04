@@ -14,11 +14,21 @@ function setTheme(next){
   themeBtn.setAttribute('aria-label', next === 'dark' ? 'Cambiar a tema crema' : 'Cambiar a tema oscuro');
 }
 
+// El tema ya lo resolvio el script del <head>; aqui solo se sincroniza la etiqueta
 setTheme(html.getAttribute('data-theme') || 'dark');
 
 themeBtn.addEventListener('click', () => {
-  const current = html.getAttribute('data-theme');
-  setTheme(current === 'dark' ? 'cream' : 'dark');
+  const next = html.getAttribute('data-theme') === 'dark' ? 'cream' : 'dark';
+  setTheme(next);
+  // Se recuerda la eleccion; a partir de aqui manda sobre la preferencia del sistema
+  try { localStorage.setItem('theme', next); } catch(e){}
+});
+
+// Mientras no haya eleccion propia, se sigue al sistema
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+  let guardado;
+  try { guardado = localStorage.getItem('theme'); } catch(err){}
+  if(!guardado) setTheme(e.matches ? 'cream' : 'dark');
 });
 
 // Menu movil
