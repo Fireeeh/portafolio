@@ -23,16 +23,22 @@
           </span>
         </a>
 
-        <nav class="nav__links" aria-label="Secciones">
+        <nav class="nav__links" id="navLinks" aria-label="Secciones">
           <a href="#top">Inicio</a>
           <a href="#proyectos">Proyectos</a>
           <a href="#habilidades">Habilidades</a>
+          <a class="nav__links-extra" href="https://github.com/Fireeeh" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
 
         <div class="nav__cta">
-          <button class="btn btn--toggle" id="themeBtn" type="button" aria-label="Cambiar tema">Tema: Oscuro</button>
-          <a class="btn" href="https://github.com/Fireeeh" target="_blank" rel="noreferrer">GitHub</a>
+          <button class="btn btn--toggle" id="themeBtn" type="button" aria-label="Cambiar tema"><span class="btn__label">Tema: Oscuro</span></button>
+          <a class="btn btn--desktop" href="https://github.com/Fireeeh" target="_blank" rel="noreferrer">GitHub</a>
           <a class="btn btn--primary" href="https://www.linkedin.com/in/mackarenafloresg/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <button class="nav__burger" id="navBurger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </header>

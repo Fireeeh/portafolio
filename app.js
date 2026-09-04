@@ -6,9 +6,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
 
+const themeLabel = themeBtn.querySelector('.btn__label');
+
 function setTheme(next){
   html.setAttribute('data-theme', next);
-  themeBtn.textContent = next === 'dark' ? 'Tema: Oscuro' : 'Tema: Crema';
+  themeLabel.textContent = next === 'dark' ? 'Tema: Oscuro' : 'Tema: Crema';
   themeBtn.setAttribute('aria-label', next === 'dark' ? 'Cambiar a tema crema' : 'Cambiar a tema oscuro');
 }
 
@@ -18,6 +20,47 @@ themeBtn.addEventListener('click', () => {
   const current = html.getAttribute('data-theme');
   setTheme(current === 'dark' ? 'cream' : 'dark');
 });
+
+// Menu movil
+(function initMobileMenu(){
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  if(!burger || !navLinks) return;
+
+  function setMenu(open){
+    navLinks.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Cerrar menu' : 'Abrir menu');
+  }
+
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setMenu(burger.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Cerrar al elegir una seccion
+  navLinks.addEventListener('click', (e) => {
+    if(e.target.closest('a')) setMenu(false);
+  });
+
+  // Cerrar al tocar fuera del menu
+  document.addEventListener('click', (e) => {
+    if(!navLinks.contains(e.target) && !burger.contains(e.target)) setMenu(false);
+  });
+
+  // Cerrar con Escape, devolviendo el foco al boton
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && navLinks.classList.contains('is-open')){
+      setMenu(false);
+      burger.focus();
+    }
+  });
+
+  // Al volver a escritorio el panel deja de aplicar
+  window.matchMedia('(min-width: 921px)').addEventListener('change', (e) => {
+    if(e.matches) setMenu(false);
+  });
+})();
 
 // Reveal
 const revealEls = document.querySelectorAll('.reveal');
