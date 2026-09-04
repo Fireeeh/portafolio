@@ -22,6 +22,7 @@ html[data-theme="cream"]{
 
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
+html{ scroll-behavior:smooth; }
 
 /* Fondo único */
 body{
@@ -268,7 +269,7 @@ a:hover{ text-decoration:underline; }
   justify-content:center;
   background:transparent;
 }
-.hero__below{ padding:18px; }
+main > section + section{ margin-top:16px; }
 
 @media (max-width: 920px){ 
   .hero__layout{ grid-template-columns:1fr; min-height: auto; }
@@ -398,7 +399,7 @@ section{ scroll-margin-top:90px; }
 .col-6{ grid-column:span 6; }
 .col-4{ grid-column:span 4; }
 @media (max-width: 920px){
-  .col-12,.col-6,.col-4{ grid-column:span 12; }
+  .col-12,.col-8,.col-6,.col-4{ grid-column:span 12; }
   .grid{ gap: 10px; }
   .section__head{ margin: 0 0 10px; flex-wrap: wrap; }
   .section__head h2{ font-size: 16px; }
@@ -407,11 +408,49 @@ section{ scroll-margin-top:90px; }
 @media (max-width: 640px){
   .wrap{ width: min(100% - 24px, var(--max)); padding: 12px 0 50px; }
   .grid{ gap: 8px; }
-  .hero__below{ padding: 12px; }
+  main > section + section{ margin-top:12px; }
   section{ scroll-margin-top: 70px; }
 }
 
 .box{ padding:16px; }
+
+/* Sobre mi */
+.col-8{ grid-column:span 8; }
+.sobre__texto{
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+.sobre__texto:last-child{ margin-bottom:0; }
+
+.linea{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.linea li{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding-left:16px;
+  border-left:2px solid color-mix(in srgb, var(--c1) 45%, transparent);
+}
+.linea__fecha{
+  font-size:11.5px;
+  font-weight:800;
+  letter-spacing:.3px;
+  text-transform:uppercase;
+  color:color-mix(in srgb, var(--c1) 85%, var(--text));
+}
+.linea__hecho{
+  font-size:13.5px;
+  color:var(--muted);
+  line-height:1.45;
+}
 .box h3{ margin:0 0 10px; font-size:14px; }
 .list{
   margin:0;
@@ -441,15 +480,11 @@ section{ scroll-margin-top:90px; }
   box-shadow:0 12px 30px rgba(0,0,0,.12);
   display:flex; align-items:center; justify-content:center;
 }
-.proj__media span{
-  font-weight:800;
-  letter-spacing:.2px;
-  color:color-mix(in srgb, var(--text) 70%, var(--muted));
-  font-size:13px;
-  padding:8px 10px;
-  border-radius:999px;
-  border:1px dashed color-mix(in srgb, var(--c1) 35%, var(--border));
-  background:color-mix(in srgb, var(--panel) 65%, transparent);
+.proj__img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 .proj__top{
   display:flex; align-items:start; justify-content:space-between; gap:10px;
@@ -482,6 +517,69 @@ section{ scroll-margin-top:90px; }
 }
 .proj__links{ display:flex; gap:10px; flex-wrap:wrap; }
 
+/* Diagrama de arquitectura (sustituye a la captura en proyectos internos) */
+.proj__media--diagrama{
+  aspect-ratio:auto;
+  padding:18px;
+  background:linear-gradient(135deg,
+    color-mix(in srgb, var(--c4) 22%, transparent),
+    color-mix(in srgb, var(--c1) 10%, transparent));
+}
+.diagrama{ width:100%; height:auto; display:block; }
+
+/* En pantallas estrechas el SVG se encogeria hasta ~4px de texto:
+   mejor mantener un ancho minimo legible y dejar que el diagrama
+   se desplace dentro de su propia caja. */
+@media (max-width: 760px){
+  .proj__media--diagrama{
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:14px;
+  }
+  .diagrama{ min-width:740px; }
+}
+.diagrama__pista{
+  display:none;
+  margin:8px 0 0;
+  font-size:11.5px;
+  color:color-mix(in srgb, var(--muted) 75%, transparent);
+}
+@media (max-width: 760px){
+  .diagrama__pista{ display:block; }
+}
+.d-caja{
+  fill:color-mix(in srgb, var(--panel2) 85%, var(--bg));
+  stroke:color-mix(in srgb, var(--c1) 40%, var(--border));
+  stroke-width:1.5;
+}
+.d-caja--tenue{ fill:color-mix(in srgb, var(--panel) 70%, var(--bg)); }
+.d-caja--datos{ stroke:color-mix(in srgb, var(--c1) 70%, transparent); stroke-dasharray:5 4; }
+.d-linea{
+  fill:none;
+  stroke:color-mix(in srgb, var(--c1) 45%, var(--border));
+  stroke-width:1.5;
+}
+.d-txt{
+  fill:var(--text);
+  text-anchor:middle;
+  font-family:var(--sans);
+}
+.d-txt--tit{ font-size:16px; font-weight:800; }
+.d-txt--sm{ font-size:13px; fill:var(--muted); }
+.d-txt--et{
+  font-size:11.5px;
+  font-weight:800;
+  letter-spacing:.4px;
+  fill:color-mix(in srgb, var(--c1) 85%, var(--text));
+}
+
+.proj__nota{
+  margin:10px 0 0;
+  font-size:12.5px;
+  color:color-mix(in srgb, var(--muted) 80%, transparent);
+  font-style:italic;
+}
+
 @media (max-width: 640px){
   .proj{ padding: 12px; }
   .proj__media{ aspect-ratio: 16/10; border-radius: 12px; }
@@ -494,6 +592,7 @@ section{ scroll-margin-top:90px; }
   .proj__links{ gap: 8px; }
   .box{ padding: 14px; }
   .box h3{ font-size: 13px; margin: 0 0 8px; }
+  .sobre__texto{ font-size: 13px; line-height: 1.65; }
   .list{ font-size: 12.5px; line-height: 1.65; padding-left: 16px; }
 }
 

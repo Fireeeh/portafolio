@@ -1,24 +1,35 @@
 // Año footer
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('year');
+if(yearEl) yearEl.textContent = new Date().getFullYear();
 
 
 // Tema Oscuro <-> Crema
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
 
-const themeLabel = themeBtn.querySelector('.btn__label');
+const themeLabel = themeBtn && themeBtn.querySelector('.btn__label');
 
 function setTheme(next){
   html.setAttribute('data-theme', next);
-  themeLabel.textContent = next === 'dark' ? 'Tema: Oscuro' : 'Tema: Crema';
-  themeBtn.setAttribute('aria-label', next === 'dark' ? 'Cambiar a tema crema' : 'Cambiar a tema oscuro');
+  if(themeLabel) themeLabel.textContent = next === 'dark' ? 'Tema: Oscuro' : 'Tema: Crema';
+  if(themeBtn) themeBtn.setAttribute('aria-label', next === 'dark' ? 'Cambiar a tema crema' : 'Cambiar a tema oscuro');
 }
 
+// El tema ya lo resolvio el script del <head>; aqui solo se sincroniza la etiqueta
 setTheme(html.getAttribute('data-theme') || 'dark');
 
-themeBtn.addEventListener('click', () => {
-  const current = html.getAttribute('data-theme');
-  setTheme(current === 'dark' ? 'cream' : 'dark');
+if(themeBtn) themeBtn.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'cream' : 'dark';
+  setTheme(next);
+  // Se recuerda la eleccion; a partir de aqui manda sobre la preferencia del sistema
+  try { localStorage.setItem('theme', next); } catch(e){}
+});
+
+// Mientras no haya eleccion propia, se sigue al sistema
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+  let guardado;
+  try { guardado = localStorage.getItem('theme'); } catch(err){}
+  if(!guardado) setTheme(e.matches ? 'cream' : 'dark');
 });
 
 // Menu movil
@@ -147,11 +158,11 @@ revealEls.forEach(el => io.observe(el));
 
   for(let i = 0; i < MAX; i++) createPetal();
 
-  setInterval(() => {
+  function reponerPetalo(){
     if(layer.querySelectorAll('.petal').length < MAX){
       createPetal();
     }
-  }, SPAWN_EVERY_MS);
+  }
 
   // LOOP PRINCIPAL
   function tick(){
@@ -177,8 +188,25 @@ revealEls.forEach(el => io.observe(el));
       p.style.setProperty('--windX', `${localWind.toFixed(2)}px`);
     });
 
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
   }
 
-  tick();
+  // Con la pestana oculta no se pinta nada: seguir animando solo gasta bateria
+  let rafId = null;
+  let spawnId = null;
+
+  function arrancar(){
+    if(rafId === null) rafId = requestAnimationFrame(tick);
+    if(spawnId === null) spawnId = setInterval(reponerPetalo, SPAWN_EVERY_MS);
+  }
+  function detener(){
+    if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; }
+    if(spawnId !== null){ clearInterval(spawnId); spawnId = null; }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? detener() : arrancar();
+  });
+
+  arrancar();
 })();
