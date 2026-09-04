@@ -489,7 +489,7 @@ section{ scroll-margin-top:90px; }
 .col-6{ grid-column:span 6; }
 .col-4{ grid-column:span 4; }
 @media (max-width: 920px){
-  .col-12,.col-8,.col-6,.col-4{ grid-column:span 12; }
+  .col-12,.col-6,.col-4{ grid-column:span 12; }
   .grid{ gap: 10px; }
   .section__head{ margin: 0 0 10px; flex-wrap: wrap; }
   .section__head h2{ font-size: 16px; }
@@ -505,7 +505,6 @@ section{ scroll-margin-top:90px; }
 .box{ padding:16px; }
 
 /* Sobre mi */
-.col-8{ grid-column:span 8; }
 .sobre__texto{
   margin:0 0 12px;
   color:var(--muted);
