@@ -216,6 +216,41 @@
         <div class="grid">
           <article class="card proj col-12">
             <div class="proj__media">
+              <a href="https://que-me-pongo.pages.dev/demo" target="_blank" rel="noreferrer" aria-label="Abrir la demo de Qué me pongo" style="display:block;width:100%;height:100%">
+                <img class="proj__img" style="object-position:top"
+                     src="./que-me-pongo.webp"
+                     srcset="./que-me-pongo-700.webp 700w, ./que-me-pongo.webp 1200w"
+                     sizes="(min-width: 1160px) 1056px, 92vw"
+                     width="1200" height="733"
+                     loading="lazy" decoding="async"
+                     alt="Demo de Qué me pongo: prendas del clóset a la izquierda y, a la derecha, el outfit armado con su puntaje de armonía de color">
+              </a>
+            </div>
+            <div class="proj__top">
+              <h3 class="proj__title">Qué me pongo — Clóset digital</h3>
+              <span class="tag">Demo interactiva</span>
+            </div>
+            <p class="proj__desc">
+              Aplicación para organizar la ropa que ya tienes: registras cada prenda, armas y guardas outfits,
+              y la app te sugiere <strong>qué ponerte hoy</strong> según la ocasión, la temporada y el clima.
+              Lleva el historial de uso, avisa qué lavar y muestra las prendas olvidadas y el costo por uso.
+            </p>
+            <p class="proj__desc">
+              Las sugerencias salen de un <strong>motor de reglas propio, sin IA</strong>: mide la armonía de
+              color del outfit en el espacio OKLCH, la afinidad con la paleta personal (colorimetría de 12
+              estaciones), la formalidad para la ocasión y el descanso de cada prenda, y explica por qué propone
+              cada combinación. Multiusuario con datos aislados por políticas RLS en PostgreSQL.
+            </p>
+            <div class="stack"><span>React</span><span>TypeScript</span><span>Vite</span><span>Tailwind CSS</span><span>Supabase</span><span>PostgreSQL</span></div>
+            <p class="proj__nota">La demo usa un clóset ficticio que vive solo en el navegador: no requiere cuenta y no se conecta a la base de datos de la aplicación.</p>
+            <div class="proj__links">
+              <a class="btn btn--primary" href="https://que-me-pongo.pages.dev/demo" target="_blank" rel="noreferrer">Ver demo</a>
+              <a class="btn" href="https://que-me-pongo.pages.dev/" target="_blank" rel="noreferrer">Ver la aplicación</a>
+            </div>
+          </article>
+
+          <article class="card proj col-12">
+            <div class="proj__media">
               <a href="./ledger/" aria-label="Abrir la demo de Ledger" style="display:block;width:100%;height:100%">
                 <img class="proj__img" style="object-position:top"
                      src="./ledger.webp"
